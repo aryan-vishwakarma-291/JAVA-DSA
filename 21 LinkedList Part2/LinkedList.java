@@ -244,7 +244,8 @@ public class LinkedList {
 
     }
 
-    //to check cycle
+    //to check cycle 
+    //this algo is known as FLoyed's cycle fiding algorithm 
     public static boolean isCycle() {
         Node fast = head;
         Node slow = head;
@@ -262,6 +263,12 @@ public class LinkedList {
     }
 
     //to remove cycle
+    //1 detect cycle 
+    //2 then assign slow to head
+    //3 then we take prev node to track fast node
+    //4 then we move again fast and slow by 1 while slow == fast
+    //5 at last we points prev.next -> null so that we can break that cycle
+    
     public static void removeCycle() {
         // 1 -> To detect cycle
         Node slow = head;

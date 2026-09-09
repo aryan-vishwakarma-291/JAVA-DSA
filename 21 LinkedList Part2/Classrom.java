@@ -1,7 +1,8 @@
 import java.util.LinkedList;
 public class Classrom {
     public static void main(String[] args) {
-        //create -
+        //create 
+        //we have to use classes like Integer , Float ets instead of obj of data types likei int float
         LinkedList<Integer> ll = new LinkedList<>();
 
         //add
@@ -15,5 +16,5 @@ public class Classrom {
         ll.removeLast();
         ll.removeFirst();
         System.out.println(ll);
-    }
+    } 
 }
