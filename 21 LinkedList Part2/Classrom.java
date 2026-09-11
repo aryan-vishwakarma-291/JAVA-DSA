@@ -16,5 +16,5 @@ public class Classrom {
         ll.removeLast();
         ll.removeFirst();
         System.out.println(ll);
-    } 
+    }  
 }

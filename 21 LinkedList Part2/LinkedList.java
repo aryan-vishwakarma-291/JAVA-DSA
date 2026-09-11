@@ -309,49 +309,49 @@ public class LinkedList {
         return slow;  // mid node
     }
 
-    private Node merge(Node head1 , Node head2) {
-        Node mergeLL = new Node(-1);
-        Node temp = mergeLL;
+    private Node merge(Node head1 , Node head2) { // to sort the LL
+        Node mergeLL = new Node(-1); //create a LL named mergeLL and assign the Node with value -1
+        Node temp = mergeLL; // create a temp node and store mergeLL value
 
-        while(head != null && head2 != null) {
-            if(head1.data <= head2.data) {
-                temp.next = head1;
-                head1 = head1.next;
-                temp = temp.next;
+        while(head != null && head2 != null) { 
+            if(head1.data <= head2.data) { // comparing both heads of right and left LL
+                temp.next = head1; // temp next will points to the small node
+                head1 = head1.next; // movig head node
+                temp = temp.next; //temp will now be temp next
             } else {
-                temp.next = head2;
+                temp.next = head2; // assign head2 if it is small 
                 head2 = head2.next;
                 temp = temp.next;
             }
         }
 
-        while(head1 != null) {
+        while(head1 != null) { // for remaining values of head1 if head2 has no value
             temp.next = head1;
             head1 = head1.next;
             temp = temp.next;
         }
 
-        while(head2 != null) {
+        while(head2 != null) { // for remaining values of head2 if head1 has no value
             temp.next = head2;
             head2 = head2.next;
             temp = temp.next;
         }
 
-        return mergeLL.next;
+        return mergeLL.next; //beacause mergeLL has stored -1 in is head that why we have return its next
     }
-    public Node mergeSort(Node head) {
+    public Node mergeSort(Node head) {  //O(nlogn)
         if(head == null || head.next == null) {
             return head;
         }
         //to find mid 
-        Node mid = getMid(head);
+        Node mid = getMid(head); // this function return the mid node
         //left and right merge sort'
-        Node rightHead = mid.next;
-        mid.next = null;
-        Node newLeft = mergeSort(head);
-        Node newRight = mergeSort(rightHead);
+        Node rightHead = mid.next; // assign head of right side ll 
+        mid.next = null; // break the LL
+        Node newLeft = mergeSort(head); //calling merge sort for left LL
+        Node newRight = mergeSort(rightHead); // calling merge sort for right LL
 
-        return merge(newLeft , newRight); 
+        return merge(newLeft , newRight); // this will merge the sorted LL 
     } 
     public void zigZag() {
         //find mid
@@ -377,7 +377,7 @@ public class LinkedList {
         }
         
         Node left = head;
-        Node right = prev;
+        Node right = prev; 
         Node nextL , nextR;
 
         //zizzag merge
