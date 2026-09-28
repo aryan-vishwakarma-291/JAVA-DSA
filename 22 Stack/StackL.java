@@ -1,4 +1,5 @@
 public class StackL {
+    
     static class Node { //to implement statck using Linked List fir we create a class of node
         int data;
         Node next;
@@ -7,6 +8,7 @@ public class StackL {
             this.next = null;
         }
     }
+    
 
     static class Stack { // here we define all operation of Stack
         static Node head = null;
@@ -14,6 +16,7 @@ public class StackL {
         public static boolean isEmpty() { //to check head is null
             return head == null;
         }
+        
         
         // PUSH operation
         public static void push(int data) { //to push data 
@@ -47,6 +50,9 @@ public class StackL {
         }
 
     }
+
+    //push at bottom
+    
     public static void main(String[] args) {
         Stack s = new Stack();
         s.push(1);
