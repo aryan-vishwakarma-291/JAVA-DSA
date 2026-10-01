@@ -58,6 +58,104 @@ public class StackD {
         }
 
     }
+
+    public static boolean isValid(String str) {  //fo r valid parenthesis
+        Stack<Character> s = new Stack<>(); // create a stack s
+
+        for(int i=0; i<str.length(); i++) { //iterate throufh each characer of str
+            char ch = str.charAt(i); // store it in ch
+            //for opening 
+            if(ch == '(' || ch == '[' || ch == '{') { // condition for checking openini bracket
+                s.push(ch); //push it 
+            } else {  //check for closing bracket
+                if(s.isEmpty()) { //first we check if the stack is empty
+                    return false;
+                }
+                if((s.peek() == '(' && ch == ')') || //then check pair of each open and closing pair
+                    (s.peek() == '[' && ch == ']') ||
+                    (s.peek() == '{' && ch == '}')
+                ) {
+                    s.pop(); //if true pop the element from top
+                } else {
+                    return false; //else return false
+                }
+            }
+           
+        }
+        if(s.isEmpty()) { //at last we have to check if stack is empty or not 
+            return true; //if emprty return true
+        } else {  //else return false
+            return  false;
+        }
+    }
+
+    //valid parenthesis
+    public static boolean isDuplicate(String str) {
+        Stack<Character> s = new Stack<>();
+        for(int i=0; i<str.length(); i++) {
+            char ch = str.charAt(i);
+            //closing
+            if(ch == ')') {
+                int count = 0;
+                while(s.peek() != '(') {
+                    s.pop();
+                    count++;
+                }
+                if(count < 1) {
+                    return true;  // duplicate exists
+
+                } else {
+                    s.pop();
+                }
+
+            } else {
+                ///opening 
+                s.push(ch);
+            }
+        }
+        return false;
+    }
+
+    public static void  maxArea(int arr[]) {
+        int maxArea = 0;
+        int nsr[] = new int[arr.length];
+        int nsl[] = new int[arr.length];
+        Stack<Integer>  s = new Stack<>();
+        //next smallest right
+        for(int i=arr.length-1; i>=0; i--) {
+            while(!s.isEmpty() && arr[s.peek()] >= arr[i]) {
+                s.pop();
+            }
+            if(s.isEmpty()) {
+                nsr[i] = arr.length;
+            } else {
+                nsr[i] = s.peek();
+            }
+            s.push(i);
+        }
+
+        //next smaller left
+        s = new Stack<>();
+        for(int i=0; i<arr.length; i++) {
+            while(!s.isEmpty() && arr[s.peek()] >= arr[i]) {
+                s.pop();
+            }
+            if(s.isEmpty()) {
+                nsl[i] = -1;
+            } else {
+                nsl[i] = s.peek();
+            }
+            s.push(i);
+        }
+        //curretn width = j-i-1 = 
+        for(int i=0; i<arr.length; i++) {
+            int height = arr[i];
+            int width = nsr[i] - nsl[i] - 1;
+            int currArea = height * width;
+            maxArea = Math.max(maxArea, currArea);
+        }
+        System.out.println("Max area in histogram is " + maxArea);
+    }
     public static void main(String[] args) { //TO push an element at bottom
        //Ques 1
         // Stack <Integer> s = new Stack<>();
@@ -96,16 +194,58 @@ public class StackD {
         // }
 
         //Ques 4
-        int stocks[] = {100,80,60,70,60,85,100};
-        int span[] = new int[stocks.length];
-        stockSpan(stocks,span);
+        // int stocks[] = {100,80,60,70,60,85,100};
+        // int span[] = new int[stocks.length];
+        // stockSpan(stocks,span);
 
-        for(int i=0; i<span.length; i++) {
-            System.out.println(span[i] + " ");
-        }
+        // for(int i=0; i<span.length; i++) {
+        //     System.out.println(span[i] + " ");
+        // }
+
+        //ques 5
+        // int arr[] = {6,8,0,1,3};
+        // Stack<Integer> s = new Stack<>();
+        // int nextGreater[] = new int [arr.length];
+
+        // for(int i=arr.length-1; i>=0; i--) {
+        //     //while loop
+        //     while(!s.isEmpty() && arr[s.peek()] <= arr[i]) {
+        //         s.pop();
+        //     }
+
+        //     //if-else
+        //         if(s.isEmpty()) {
+        //             nextGreater[i] = -1;
+        //         } else {
+        //             nextGreater[i] = arr[s.peek()];     
+        //         }
+
+        //     // push element in statck
+        //     s.push(i);
+
+             
+        // }
+        // for(int i=0; i<nextGreater.length; i++) {
+        //     System.out.print(nextGreater[i] + " ");
+        // }
+        // System.out.println();
 
 
+    //Ques 6
+    // String str = "";  //O(N)
+    // System.out.println(isValid(str));
 
+    //ques 7
+    //duplicate parenthesis
+    // String str = "((a+b))"; //true  //O(N)
+    // String str2 = "(a-b)"; // false
+    // System.out.println(isDuplicate(str2));
+
+    
+    //ques 8
+    //Max area in histogram
+    int arr[] = {2,1,5,6,2,3};
+    maxArea(arr);
 
     }
 }
